@@ -31,6 +31,7 @@ function library:CreateWindow(title)
     TopFrame.Size = UDim2.new(0, 335, 0, 30)
     TopFrame.Active = true
     TopFrame.Draggable = true
+    TopFrame.Visible = false
     
     Contianer.Name = "Contianer"
     Contianer.Parent = TopFrame
@@ -58,6 +59,17 @@ function library:CreateWindow(title)
     TitleText.TextColor3 = Color3.fromRGB(203, 203, 204)
     TitleText.TextSize = 14.000
     TitleText.Text = title
+
+    function window:Close()
+        for i, v in pairs(game.CoreGui:GetChildren()) do
+            if v:IsA("ScreenGui") then
+                if v.Name == title then
+                    v.BackgroundTransparency = 1
+                end
+            end
+        end
+    end
+    
 
     function window:CreateSlider(text, width, min, max, callback)
         text = text or "Slider"
@@ -208,5 +220,7 @@ function library:CreateWindow(title)
     end
     return window
 end
+
+
 
 return library
