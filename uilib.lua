@@ -135,6 +135,13 @@ function library:CreateWindow(title)
         SliderValue.Text = min
         SliderValue.TextColor3 = Color3.fromRGB(203, 203, 204)
         SliderValue.TextSize = 14.000
+
+        SliderValue.FocusLost:connect(function()
+            Value = SliderValue.Text
+            pcall(function()
+                callback(Value)
+            end)
+         end)
         
         SliderButton.MouseButton1Down:Connect(function()
             Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min)) or 0
