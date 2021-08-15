@@ -69,7 +69,6 @@ function library:CreateWindow(title)
             end
         end
     end
-    
 
     function window:CreateSlider(text, width, min, max, callback)
         text = text or "Slider"
