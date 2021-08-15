@@ -31,7 +31,6 @@ function library:CreateWindow(title)
     TopFrame.Size = UDim2.new(0, 335, 0, 30)
     TopFrame.Active = true
     TopFrame.Draggable = true
-    TopFrame.Visible = false
     
     Contianer.Name = "Contianer"
     Contianer.Parent = TopFrame
