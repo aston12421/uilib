@@ -130,7 +130,7 @@ function library:CreateWindow(title)
         SliderValue.BorderSizePixel = 0
         SliderValue.Position = UDim2.new(0, 0, 0.5, 0)
         SliderValue.Size = UDim2.new(0, 10, 0, 18)
-        SliderValue.ClearTextOnFocus = false
+        SliderValue.ClearTextOnFocus = true
         SliderValue.Font = Enum.Font.SourceSans
         SliderValue.Text = min
         SliderValue.TextColor3 = Color3.fromRGB(203, 203, 204)
