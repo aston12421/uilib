@@ -60,17 +60,12 @@ function library:CreateWindow(title)
     TitleText.Text = title
 
     function window:ToggleVisibility()
-        for i, v in pairs(game.CoreGui:GetChildren()) do
-            if v:IsA("ScreenGui") then
-                if v.Name == title then
-                    if v.Visible then
-                        v.Visible = false
-                    else
-                        v.Visible = true
-                    end
-                end
-            end
+        if TopFrame.Visible then
+            TopFrame.Visible = false
+        else
+            TopFrame.Visible = true
         end
+
     end
 
     function window:CreateSlider(text, width, min, max, callback)
