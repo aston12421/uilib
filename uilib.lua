@@ -59,11 +59,15 @@ function library:CreateWindow(title)
     TitleText.TextSize = 14.000
     TitleText.Text = title
 
-    function window:Close()
+    function window:ToggleVisibility()
         for i, v in pairs(game.CoreGui:GetChildren()) do
             if v:IsA("ScreenGui") then
                 if v.Name == title then
-                    v.BackgroundTransparency = 1
+                    if v.Visible then
+                        v.Visible = false
+                    else
+                        v.Visible = true
+                    end
                 end
             end
         end
