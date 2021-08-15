@@ -136,7 +136,7 @@ function library:CreateWindow(title)
         TextLabel.TextXAlignment = Enum.TextXAlignment.Left
         
         SliderButton.MouseButton1Down:Connect(function()
-            Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min)) or 0
+            Value = math.floor((((max - min) / width) * SliderInner.AbsoluteSize.X) + min) or 0
             pcall(function()
                 callback(Value)
             end)
@@ -144,7 +144,7 @@ function library:CreateWindow(title)
             TextLabel.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
             moveconnection = mouse.Move:Connect(function()
                 TextLabel.Text = Value
-                Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min))
+                Value = math.floor((((max - min) / width) * SliderInner.AbsoluteSize.X) + min)
                 pcall(function()
                     callback(Value)
                     TextLabel.Text = Value
@@ -155,7 +155,7 @@ function library:CreateWindow(title)
             releaseconnection = uis.InputEnded:Connect(function(Mouse)
                 if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
                     TextLabel.Text = Value
-                    Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min))
+                    Value = math.floor((((max - min) / width) * SliderInner.AbsoluteSize.X) + min)
                     pcall(function()
                         callback(Value)
                         TextLabel.Text = Value
@@ -218,7 +218,5 @@ function library:CreateWindow(title)
     end
     return window
 end
-
-
 
 return library
