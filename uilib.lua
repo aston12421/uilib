@@ -78,6 +78,7 @@ function library:CreateWindow(title)
         local mouse = game.Players.LocalPlayer:GetMouse()
         local uis = game:GetService("UserInputService")
         local Value;
+        local SValue;
         
         local Slider = Instance.new("Frame")
         local SliderText = Instance.new("TextLabel")
@@ -148,8 +149,8 @@ function library:CreateWindow(title)
             pcall(function()
                 callback(Value)
             end)
-            SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-            SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+            SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
+            SliderValue:TweenPosition(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
             moveconnection = mouse.Move:Connect(function()
                 SliderValue.Text = Value
                 Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min))
@@ -157,8 +158,8 @@ function library:CreateWindow(title)
                     callback(Value)
                     SliderValue.Text = Value
                 end)
-                SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-                SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+                SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
+                SliderValue:TweenPosition(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
             end)
             releaseconnection = uis.InputEnded:Connect(function(Mouse)
                 if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
@@ -168,8 +169,8 @@ function library:CreateWindow(title)
                         callback(Value)
                         SliderValue.Text = Value
                     end)
-                    SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-                    SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+                    SliderInner:TweenSize(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
+                    SliderValue:TweenPosition(UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12))
                     moveconnection:Disconnect()
                     releaseconnection:Disconnect()
                 end
