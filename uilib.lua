@@ -83,7 +83,7 @@ function library:CreateWindow(title)
         local SliderText = Instance.new("TextLabel")
         local SliderButton = Instance.new("TextButton")
         local SliderInner = Instance.new("Frame")
-        local SliderValue = Instance.new("TextBox")
+        local TextLabel = Instance.new("TextLabel")
         
         Slider.Name = "Slider"
         Slider.Parent = Contianer
@@ -123,27 +123,17 @@ function library:CreateWindow(title)
         SliderText.TextSize = 14.000
         SliderText.TextXAlignment = Enum.TextXAlignment.Left
         
-        SliderValue.Name = "SliderValue"
-        SliderValue.Parent = Slider
-        SliderValue.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
-        SliderValue.BackgroundTransparency = 1.000
-        SliderValue.BorderSizePixel = 0
-        SliderValue.Position = UDim2.new(0, 0, 0.5, 0)
-        SliderValue.Size = UDim2.new(0, 10, 0, 18)
-        SliderValue.ClearTextOnFocus = true
-        SliderValue.Font = Enum.Font.SourceSans
-        SliderValue.Text = min
-        SliderValue.TextColor3 = Color3.fromRGB(203, 203, 204)
-        SliderValue.TextSize = 14.000
-
-        SliderValue.FocusLost:connect(function()
-            Value = SliderValue.Text
-            pcall(function()
-                callback(Value)
-            end)
-            SliderInner.Size = UDim2.new(0, math.clamp(Value - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-            SliderValue.Position = UDim2.new(0, math.clamp(Value - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-         end)
+        TextLabel.Parent = Slider
+        TextLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
+        TextLabel.BackgroundTransparency = 1.000
+        TextLabel.BorderSizePixel = 0
+        TextLabel.Position = UDim2.new(0, 0, 0, 12)
+        TextLabel.Size = UDim2.new(0, 10, 0, 18)
+        TextLabel.Font = Enum.Font.SourceSans
+        TextLabel.Text = min
+        TextLabel.TextColor3 = Color3.fromRGB(203, 203, 204)
+        TextLabel.TextSize = 14.000
+        TextLabel.TextXAlignment = Enum.TextXAlignment.Left
         
         SliderButton.MouseButton1Down:Connect(function()
             Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min)) or 0
@@ -151,27 +141,27 @@ function library:CreateWindow(title)
                 callback(Value)
             end)
             SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-            SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+            TextLabel.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
             moveconnection = mouse.Move:Connect(function()
-                SliderValue.Text = Value
+                TextLabel.Text = Value
                 Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min))
                 pcall(function()
                     callback(Value)
-                    SliderValue.Text = Value
+                    TextLabel.Text = Value
                 end)
                 SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-                SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+                TextLabel.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
             end)
             releaseconnection = uis.InputEnded:Connect(function(Mouse)
                 if Mouse.UserInputType == Enum.UserInputType.MouseButton1 then
-                    SliderValue.Text = Value
+                    TextLabel.Text = Value
                     Value = math.floor((((tonumber(max) - tonumber(min)) / width) * SliderInner.AbsoluteSize.X) + tonumber(min))
                     pcall(function()
                         callback(Value)
-                        SliderValue.Text = Value
+                        TextLabel.Text = Value
                     end)
                     SliderInner.Size = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
-                    SliderValue.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
+                    TextLabel.Position = UDim2.new(0, math.clamp(mouse.X - SliderInner.AbsolutePosition.X, 0, width), 0, 12)
                     moveconnection:Disconnect()
                     releaseconnection:Disconnect()
                 end
